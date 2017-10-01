@@ -23,3 +23,5 @@ sudo is NEEDED because of using port < 1024
 ```bash
 sudo bundle exec ruby sinatra.rb  -p 80
 ```
+
+Safari終了後、日付変更再起動で擬似的に日数経過をシミュレートできる。では一度広告クリックされた場合は？

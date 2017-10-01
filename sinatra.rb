@@ -13,6 +13,12 @@ get '/img' do
     text_image cookies[:img]
 end
 
+get '/iframe' do 
+    content_type :png
+    response.set_cookie(:iframe, :value => Time.now.to_s + params[:plus], :expires => next_year) if cookies[:iframe].nil?
+    text_image cookies[:iframe]
+end
+
 get '/img_js' do
     content_type :png
     response.set_cookie(:img_js, :value => Time.now.to_s + params[:plus], :expires => next_year) if cookies[:img_js].nil?

@@ -13,6 +13,7 @@
                     console.log('cookies', json);
                     document.querySelector('#cookies').innerHTML = json;
                 });
+                document.querySelector('#fpc').innerHTML = document.cookie;
             }
             // IMG JS: JS から IMG タグ経由で 3rd Party Cookies を作成させる
             (function () {
@@ -31,13 +32,22 @@
                 });
             };
             setJSCookie('?plus=helloworld');
+            // First Party Cookie
+            (function () {
+                if (document.cookie === '') {
+                    document.cookie = "time=" + new Date() + '; max-age=86400000';
+                }
+            })();
         </script>
     </head>
     <body>
+        <div id="fpc">
+        </div>
         <div>
             Image: <img src="http://googleads.g.doubleclick.net/img?plus=1234567890">
             <!-- IMG で 3rd Party Cookies を作成させる -->
         </div>
+            IFrame: <iframe src="http://googleads.g.doubleclick.net/iframe?plus=abc" frameborder="0"></iframe>
         <div>
             <button onclick="showCookies();">Show Cookies</button> 
         </div>       
