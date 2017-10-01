@@ -1,0 +1,46 @@
+<html>
+    <head>
+        <title>3rd party cookies TEST</title>
+        <script>
+            function showCookies() {
+                console.log('Show Cookies');
+                fetch('http://googleads.g.doubleclick.net/cookies', {
+                    mode: 'cors',
+                    credentials: 'include'
+                }).then(function(response) {
+                    return response.json();
+                }).then(function(json) {
+                    console.log('cookies', json);
+                    document.querySelector('#cookies').innerHTML = json;
+                });
+            }
+            // IMG JS: JS から IMG タグ経由で 3rd Party Cookies を作成させる
+            (function () {
+                var img = new Image();
+                img.src = 'http://googleads.g.doubleclick.net/img_js?plus=fromJS';
+            }());
+            // JS: JS fetch で3rd Party Cookies を作成させる
+            function setJSCookie (query) {
+                fetch('http://googleads.g.doubleclick.net/js' + query, {
+                    mode: 'cors',
+                    credentials: 'include'
+                }).then(function(response) {
+                    return response.json();
+                }).then(function(json) {
+                    console.log('js', json);
+                });
+            };
+            setJSCookie('?plus=helloworld');
+        </script>
+    </head>
+    <body>
+        <div>
+            Image: <img src="http://googleads.g.doubleclick.net/img?plus=1234567890">
+            <!-- IMG で 3rd Party Cookies を作成させる -->
+        </div>
+        <div>
+            <button onclick="showCookies();">Show Cookies</button> 
+        </div>       
+        <div id="cookies"></div>
+    </body>
+</html>
